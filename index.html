@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+
+  <!-- ═══════════════════════════════════════════════════════════
+       PRIMARY SEO META TAGS
+  ═══════════════════════════════════════════════════════════ -->
+  <title>Attendance Percentage Calculator – Know How Many Days to Attend | RDJPublishers</title>
+  <meta name="description" content="Free Attendance Percentage Calculator – instantly find your current attendance %, how many more periods you need, and how many days to attend to reach your desired percentage. Fast, offline-ready PWA." />
+  <meta name="keywords" content="attendance calculator, attendance percentage calculator, how many days to attend, college attendance, school attendance, periods needed calculator, attendance tracker" />
+  <meta name="author" content="RDJPublishers" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <link rel="canonical" href="https://rdjpublishers.github.io/attendance-calculator/" />
+
+  <!-- ═══════════════════════════════════════════════════════════
+       OPEN GRAPH (Facebook, WhatsApp, LinkedIn)
+  ═══════════════════════════════════════════════════════════ -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="RDJPublishers" />
+  <meta property="og:title" content="Attendance Percentage Calculator – RDJPublishers" />
+  <meta property="og:description" content="Calculate your attendance percentage, find out how many more days you need to attend, and track your progress – all in one fast, free tool." />
+  <meta property="og:url" content="https://rdjpublishers.github.io/attendance-calculator/" />
+  <meta property="og:image" content="https://rdjpublishers.github.io/attendance-calculator/logo.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Attendance Calculator by RDJPublishers" />
+  <meta property="og:locale" content="en_IN" />
+
+  <!-- ═══════════════════════════════════════════════════════════
+       TWITTER CARD
+  ═══════════════════════════════════════════════════════════ -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@RDJPublishers" />
+  <meta name="twitter:creator" content="@RDJPublishers" />
+  <meta name="twitter:title" content="Attendance Percentage Calculator – RDJPublishers" />
+  <meta name="twitter:description" content="Free tool to calculate attendance %, periods needed & days to attend. Try it now!" />
+  <meta name="twitter:image" content="https://rdjpublishers.github.io/attendance-calculator/logo.jpg" />
+  <meta name="twitter:image:alt" content="Attendance Calculator by RDJPublishers" />
+
+  <!-- ═══════════════════════════════════════════════════════════
+       STRUCTURED DATA (JSON-LD)
+  ═══════════════════════════════════════════════════════════ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Attendance Percentage Calculator",
+    "url": "https://rdjpublishers.github.io/attendance-calculator/",
+    "description": "Calculate your attendance percentage, find periods needed, and how many days to attend to reach your desired percentage.",
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" },
+    "author": {
+      "@type": "Organization",
+      "name": "RDJPublishers",
+      "url": "https://rdjpublishers.github.io/"
+    }
+  }
+  </script>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       FAVICON & PWA
+  ═══════════════════════════════════════════════════════════ -->
+  <link rel="icon" type="image/jpeg" href="logo.jpg" />
+  <link rel="apple-touch-icon" href="logo.jpg" />
+  <meta name="theme-color" content="#1565C0" />
+
+  <!-- ═══════════════════════════════════════════════════════════
+       GOOGLE ADSENSE AUTO ADS
+       (No slot ID needed for Auto Ads – Google places them automatically)
+  ═══════════════════════════════════════════════════════════ -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8728382905346597"
+     crossorigin="anonymous"></script>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       FONTS & ICONS
+  ═══════════════════════════════════════════════════════════ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    /* ─── DESIGN TOKENS ─────────────────────────────────────── */
+    :root {
+      --blue-900: #0D2B6B;
+      --blue-700: #1565C0;
+      --blue-500: #1E88E5;
+      --blue-300: #64B5F6;
+      --blue-100: #E3F2FD;
+      --accent:   #FF6F00;
+      --success:  #00897B;
+      --danger:   #E53935;
+      --surface:  #FFFFFF;
+      --bg:       #F0F4F8;
+      --text:     #1A202C;
+      --muted:    #718096;
+      --border:   #E2E8F0;
+      --shadow-sm: 0 2px 8px rgba(21,101,192,0.08);
+      --shadow-md: 0 6px 24px rgba(21,101,192,0.13);
+      --shadow-lg: 0 16px 48px rgba(21,101,192,0.18);
+      --radius:   14px;
+      --font-body: 'Nunito', sans-serif;
+      --font-mono: 'Space Mono', monospace;
+      --header-h: 60px;
+      --footer-h: 64px;
+    }
+
+    /* ─── DARK THEME ──────────────────────────────────────────── */
+    body.dark {
+      --surface:  #1E2A3A;
+      --bg:       #111827;
+      --text:     #E2E8F0;
+      --muted:    #94A3B8;
+      --border:   #2D3748;
+      --blue-100: #1A2840;
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
+      --shadow-md: 0 6px 24px rgba(0,0,0,0.4);
+    }
+
+    /* ─── RESET ───────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    /* ─── HEADER ──────────────────────────────────────────────── */
+    header {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: var(--header-h);
+      background: linear-gradient(135deg, var(--blue-900) 0%, var(--blue-700) 100%);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 1000;
+      box-shadow: 0 2px 12px rgba(13,43,107,0.35);
+    }
+    header h1 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .menu-icon {
+      position: fixed; left: 1rem; top: 0;
+      height: var(--header-h);
+      display: flex; align-items: center;
+      font-size: 1.4rem; color: #fff;
+      cursor: pointer; z-index: 2001;
+      transition: opacity 0.2s;
+    }
+    .menu-icon:hover { opacity: 0.8; }
+
+    /* ─── SIDEBAR ─────────────────────────────────────────────── */
+    .overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 1999;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .overlay.show { opacity: 1; pointer-events: all; }
+    .sidebar {
+      position: fixed; top: 0; left: 0;
+      height: 100%; width: 260px;
+      background: linear-gradient(180deg, var(--blue-900) 0%, #0a2050 100%);
+      transform: translateX(-100%);
+      transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+      z-index: 2000;
+      padding-top: calc(var(--header-h) + 1rem);
+      display: flex; flex-direction: column;
+    }
+    .sidebar.open { transform: translateX(0); }
+    .sidebar-logo {
+      display: flex; align-items: center; gap: 0.75rem;
+      padding: 0 1.25rem 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      margin-bottom: 0.5rem;
+    }
+    .sidebar-logo img { width: 40px; height: 40px; border-radius: 8px; object-fit: cover; }
+    .sidebar-logo span { color: #fff; font-weight: 800; font-size: 0.9rem; line-height: 1.2; }
+    .nav-item {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 0.85rem 1.5rem;
+      color: rgba(255,255,255,0.72);
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      font-weight: 600; font-size: 0.95rem;
+      border-left: 3px solid transparent;
+    }
+    .nav-item i { width: 20px; text-align: center; font-size: 1rem; }
+    .nav-item:hover, .nav-item.active {
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      border-left-color: var(--blue-300);
+    }
+    .sidebar-footer {
+      margin-top: auto;
+      padding: 1rem 1.5rem;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.35);
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    /* ─── MAIN ────────────────────────────────────────────────── */
+    main {
+      flex: 1;
+      padding: calc(var(--header-h) + 1.25rem) 1rem calc(var(--footer-h) + 1.25rem);
+      display: flex; flex-direction: column; align-items: center;
+    }
+
+    /* ─── SECTIONS ────────────────────────────────────────────── */
+    .section { display: none; width: 100%; max-width: 520px; }
+    .section.active {
+      display: block;
+      animation: slideUp 0.35s ease both;
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── CARD ────────────────────────────────────────────────── */
+    .card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+      margin-bottom: 1rem;
+      border: 1px solid var(--border);
+    }
+    .card-header {
+      background: linear-gradient(135deg, var(--blue-700), var(--blue-500));
+      padding: 1rem 1.25rem;
+      color: #fff;
+    }
+    .card-header h2 {
+      font-size: 1rem; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase;
+    }
+    .card-header p { font-size: 0.8rem; opacity: 0.85; margin-top: 0.2rem; }
+    .card-body { padding: 1.25rem; }
+
+    /* ─── BANNER IMAGE ────────────────────────────────────────── */
+    .banner-img {
+      width: 100%; height: 160px;
+      object-fit: cover; display: block;
+      border-radius: var(--radius) var(--radius) 0 0;
+    }
+
+    /* ─── FORM ────────────────────────────────────────────────── */
+    .form-group { margin-bottom: 1rem; }
+    .form-group label {
+      display: block;
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--blue-700); margin-bottom: 0.4rem;
+    }
+    body.dark .form-group label { color: var(--blue-300); }
+    .form-group input {
+      width: 100%;
+      padding: 0.7rem 0.9rem;
+      font-size: 1rem; font-family: var(--font-body);
+      border: 2px solid var(--border);
+      border-radius: 9px;
+      background: var(--bg);
+      color: var(--text);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+    .form-group input:focus {
+      border-color: var(--blue-500);
+      box-shadow: 0 0 0 3px rgba(30,136,229,0.15);
+    }
+    .form-group input::placeholder { color: var(--muted); font-size: 0.9rem; }
+
+    /* ─── CALCULATE BUTTON ────────────────────────────────────── */
+    #calculate-btn {
+      width: 100%;
+      padding: 0.85rem;
+      background: linear-gradient(135deg, var(--blue-700), var(--blue-500));
+      color: #fff;
+      border: none; border-radius: 10px;
+      font-size: 1rem; font-weight: 800;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 4px 16px rgba(21,101,192,0.35);
+    }
+    #calculate-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(21,101,192,0.4); }
+    #calculate-btn:active { transform: translateY(0); }
+
+    /* ─── NOTE ────────────────────────────────────────────────── */
+    .note {
+      margin-top: 1rem;
+      padding: 0.85rem 1rem;
+      background: var(--blue-100);
+      border-left: 4px solid var(--blue-500);
+      border-radius: 0 8px 8px 0;
+      font-size: 0.83rem; line-height: 1.55;
+      color: var(--blue-900);
+    }
+    body.dark .note { color: var(--blue-300); }
+
+    /* ─── RESULTS ─────────────────────────────────────────────── */
+    #results {
+      margin-top: 1.25rem;
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      animation: slideUp 0.4s ease both;
+    }
+    #results.hidden { display: none; }
+    .results-header {
+      background: linear-gradient(135deg, var(--success), #00ACC1);
+      padding: 0.9rem 1.25rem;
+      color: #fff;
+    }
+    .results-header h3 { font-size: 0.95rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; }
+    .results-body { padding: 0; }
+    .result-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.9rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .result-row:last-child { border-bottom: none; }
+    .result-label {
+      font-size: 0.78rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.06em; color: var(--muted);
+    }
+    .result-value {
+      font-family: var(--font-mono);
+      font-size: 1.15rem; font-weight: 700;
+      color: var(--blue-700);
+    }
+    body.dark .result-value { color: var(--blue-300); }
+    .result-value.big { font-size: 1.5rem; }
+    .result-badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.78rem; font-weight: 700;
+      background: var(--blue-100); color: var(--blue-700);
+    }
+
+    /* ─── HISTORY ─────────────────────────────────────────────── */
+    .history-toolbar {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+    .history-toolbar h2 { font-size: 1.1rem; font-weight: 800; }
+    .btn-danger {
+      background: var(--danger); color: #fff;
+      border: none; border-radius: 8px;
+      padding: 0.5rem 1rem;
+      font-size: 0.8rem; font-weight: 700; cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .btn-danger:hover { opacity: 0.85; }
+    #history-list { list-style: none; }
+    .history-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem;
+      margin-bottom: 0.75rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .history-item .hi-timestamp {
+      font-size: 0.7rem; color: var(--muted); margin-bottom: 0.5rem;
+    }
+    .history-item .hi-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem;
+    }
+    .hi-stat { font-size: 0.8rem; }
+    .hi-stat span { font-weight: 700; color: var(--blue-700); }
+    body.dark .hi-stat span { color: var(--blue-300); }
+    .no-history { text-align: center; color: var(--muted); padding: 2rem 0; font-size: 0.9rem; }
+
+    /* ─── SETTINGS ────────────────────────────────────────────── */
+    .setting-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 0; border-bottom: 1px solid var(--border);
+    }
+    .setting-row:last-child { border-bottom: none; }
+    .setting-row label { font-weight: 700; font-size: 0.92rem; }
+    .setting-row .sub { font-size: 0.78rem; color: var(--muted); margin-top: 0.15rem; }
+    /* Toggle switch */
+    .toggle { position: relative; width: 48px; height: 26px; flex-shrink: 0; }
+    .toggle input { opacity: 0; width: 0; height: 0; }
+    .toggle-track {
+      position: absolute; inset: 0;
+      background: var(--border); border-radius: 999px;
+      cursor: pointer; transition: background 0.25s;
+    }
+    .toggle-thumb {
+      position: absolute; width: 20px; height: 20px;
+      border-radius: 50%; background: #fff;
+      top: 3px; left: 3px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+      transition: transform 0.25s;
+      pointer-events: none;
+    }
+    .toggle input:checked ~ .toggle-track { background: var(--blue-500); }
+    .toggle input:checked ~ .toggle-thumb { transform: translateX(22px); }
+    .btn-setting {
+      background: var(--blue-700); color: #fff;
+      border: none; border-radius: 8px;
+      padding: 0.5rem 1rem; font-size: 0.82rem;
+      font-weight: 700; cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .btn-setting:hover { opacity: 0.85; }
+    .btn-setting.red { background: var(--danger); }
+
+    /* ─── ABOUT ───────────────────────────────────────────────── */
+    .about-logo {
+      width: 80px; height: 80px;
+      border-radius: 16px; object-fit: cover;
+      display: block; margin: 0 auto 1rem;
+      box-shadow: var(--shadow-md);
+    }
+    .about-card { text-align: center; }
+    .about-card h2 { font-size: 1.2rem; font-weight: 900; }
+    .about-card .version {
+      display: inline-block;
+      background: var(--blue-100); color: var(--blue-700);
+      font-size: 0.75rem; font-weight: 700;
+      padding: 0.2rem 0.7rem; border-radius: 999px;
+      margin-top: 0.3rem;
+    }
+    .about-section { margin-top: 1.25rem; text-align: left; }
+    .about-section h4 {
+      font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--muted); margin-bottom: 0.3rem;
+    }
+    .about-section p { font-size: 0.9rem; line-height: 1.6; }
+    .about-section a { color: var(--blue-500); text-decoration: none; }
+    .about-section a:hover { text-decoration: underline; }
+
+    /* ─── FOOTER NAV ──────────────────────────────────────────── */
+    footer {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      height: var(--footer-h);
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      display: flex; align-items: stretch;
+      z-index: 1000;
+      box-shadow: 0 -4px 16px rgba(21,101,192,0.08);
+    }
+    .footer-nav-item {
+      flex: 1; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      color: var(--muted); text-decoration: none;
+      gap: 0.25rem; font-size: 0.7rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.05em;
+      transition: color 0.2s; cursor: pointer;
+      border: none; background: transparent; font-family: var(--font-body);
+    }
+    .footer-nav-item i { font-size: 1.3rem; }
+    .footer-nav-item.active {
+      color: var(--blue-700);
+      background: var(--blue-100);
+      border-top: 3px solid var(--blue-700);
+    }
+    body.dark .footer-nav-item.active {
+      color: var(--blue-300); background: rgba(30,136,229,0.1);
+      border-top-color: var(--blue-300);
+    }
+    .footer-nav-item:hover:not(.active) { color: var(--blue-500); }
+
+    /* ─── SHARE BUTTONS ───────────────────────────────────────── */
+    .share-strip {
+      display: flex; gap: 0.6rem; margin-top: 0.75rem;
+    }
+    .share-btn {
+      flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+      padding: 0.5rem;
+      border: none; border-radius: 8px;
+      font-size: 0.8rem; font-weight: 700;
+      cursor: pointer; transition: opacity 0.2s;
+      color: #fff;
+    }
+    .share-btn:hover { opacity: 0.88; }
+    .share-btn.wa  { background: #25D366; }
+    .share-btn.tw  { background: #1DA1F2; }
+
+    /* ─── SCROLLBAR ───────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-thumb { background: var(--blue-300); border-radius: 4px; }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ SIDEBAR OVERLAY ═══════════════════════════════════════ -->
+  <div class="overlay" id="overlay"></div>
+
+  <!-- ═══ SIDEBAR ══════════════════════════════════════════════ -->
+  <nav class="sidebar" id="sidebar" aria-label="Main navigation">
+    <div class="sidebar-logo">
+      <img src="logo.jpg" alt="RDJPublishers logo" />
+      <span>RDJ<br>Publishers</span>
+    </div>
+    <div class="nav-item active" data-section="calculator-section" role="button" tabindex="0">
+      <i class="fas fa-calculator" aria-hidden="true"></i><span>Calculator</span>
+    </div>
+    <div class="nav-item" data-section="history-section" role="button" tabindex="0">
+      <i class="fas fa-clock-rotate-left" aria-hidden="true"></i><span>History</span>
+    </div>
+    <div class="nav-item" data-section="settings-section" role="button" tabindex="0">
+      <i class="fas fa-gear" aria-hidden="true"></i><span>Settings</span>
+    </div>
+    <div class="nav-item" data-section="about-section" role="button" tabindex="0">
+      <i class="fas fa-circle-info" aria-hidden="true"></i><span>About</span>
+    </div>
+    <div class="sidebar-footer">© 2026 RDJPublishers</div>
+  </nav>
+
+  <!-- ═══ HEADER ════════════════════════════════════════════════ -->
+  <div class="menu-icon" id="menu-icon" role="button" aria-label="Open menu" tabindex="0">
+    <i class="fas fa-bars" id="menu-icon-i" aria-hidden="true"></i>
+  </div>
+  <header>
+    <h1>Attendance Calculator</h1>
+  </header>
+
+  <!-- ═══ MAIN ══════════════════════════════════════════════════ -->
+  <main>
+
+    <!-- CALCULATOR SECTION -->
+    <section id="calculator-section" class="section active" aria-label="Attendance Calculator">
+      <div class="card">
+        <img
+          src="logo.jpg"
+          alt="Attendance Calculator – know how many days to attend"
+          class="banner-img"
+          loading="eager"
+        />
+        <div class="card-header">
+          <h2>Attendance Calculation</h2>
+          <p>Find your % and how many days you still need to attend</p>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <label for="periods-present">Periods Present</label>
+            <input id="periods-present" type="number" inputmode="numeric" min="0" step="1" placeholder="e.g. 140" aria-required="true" />
+          </div>
+          <div class="form-group">
+            <label for="total-periods">Total Periods (as of today)</label>
+            <input id="total-periods" type="number" inputmode="numeric" min="0" step="1" placeholder="e.g. 170" aria-required="true" />
+          </div>
+          <div class="form-group">
+            <label for="periods-per-day">Periods per Day</label>
+            <input id="periods-per-day" type="number" inputmode="numeric" min="1" step="1" placeholder="e.g. 6" aria-required="true" />
+          </div>
+          <div class="form-group">
+            <label for="desired-percentage">Desired Attendance %</label>
+            <input id="desired-percentage" type="number" inputmode="decimal" min="0" max="100" step="0.01" placeholder="e.g. 75" aria-required="true" />
+          </div>
+          <button id="calculate-btn" type="button" aria-label="Calculate attendance">
+            <i class="fas fa-bolt" aria-hidden="true"></i>&ensp;Calculate
+          </button>
+
+          <div class="note" role="note">
+            <strong>📌 Note:</strong> The number of days shown assumes you attend every class without any leave. If you take leave, recalculate to stay on track.
+          </div>
+        </div>
+      </div>
+
+      <!-- RESULTS -->
+      <div id="results" class="hidden" role="region" aria-live="polite" aria-label="Calculation results">
+        <div class="results-header">
+          <h3><i class="fas fa-chart-pie" aria-hidden="true"></i>&ensp;Your Results</h3>
+        </div>
+        <div class="results-body">
+          <div class="result-row">
+            <span class="result-label">Current %</span>
+            <span class="result-value big" id="current-percentage">--</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Periods Needed</span>
+            <span class="result-value" id="periods-needed">--</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Days to Attend</span>
+            <span class="result-value" id="days-needed">--</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">% After Attending</span>
+            <span class="result-value" id="percentage-after">--</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Periods Summary</span>
+            <span class="result-badge" id="attended-summary">--</span>
+          </div>
+        </div>
+        <!-- Share strip -->
+        <div class="card-body" style="padding-top:0.75rem">
+          <div class="share-strip">
+            <button class="share-btn wa" id="share-wa" aria-label="Share on WhatsApp">
+              <i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp
+            </button>
+            <button class="share-btn tw" id="share-tw" aria-label="Share on Twitter">
+              <i class="fab fa-x-twitter" aria-hidden="true"></i> Twitter
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HISTORY SECTION -->
+    <section id="history-section" class="section" aria-label="Calculation history">
+      <div class="history-toolbar">
+        <h2>History</h2>
+        <button class="btn-danger" id="clear-history-btn" aria-label="Clear all history">
+          <i class="fas fa-trash" aria-hidden="true"></i> Clear All
+        </button>
+      </div>
+      <ul id="history-list" aria-label="Past calculations"></ul>
+    </section>
+
+    <!-- SETTINGS SECTION -->
+    <section id="settings-section" class="section" aria-label="Settings">
+      <div class="card">
+        <div class="card-header">
+          <h2>Settings</h2>
+        </div>
+        <div class="card-body">
+          <div class="setting-row">
+            <div>
+              <label for="theme-toggle">Dark Mode</label>
+              <div class="sub">Easier on the eyes at night</div>
+            </div>
+            <label class="toggle" aria-label="Toggle dark mode">
+              <input type="checkbox" id="theme-toggle" />
+              <div class="toggle-track"></div>
+              <div class="toggle-thumb"></div>
+            </label>
+          </div>
+          <div class="setting-row">
+            <div>
+              <label>Clear History</label>
+              <div class="sub">Erase all saved calculations</div>
+            </div>
+            <button class="btn-setting red" id="clear-history-settings-btn" aria-label="Clear history">Clear</button>
+          </div>
+          <div class="setting-row">
+            <div>
+              <label>Refresh App</label>
+              <div class="sub">Reload to latest version</div>
+            </div>
+            <button class="btn-setting" id="refresh-btn" aria-label="Refresh app">Refresh</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about-section" class="section" aria-label="About">
+      <div class="card">
+        <div class="card-body about-card">
+          <img src="logo.jpg" alt="RDJPublishers logo" class="about-logo" />
+          <h2>Attendance Calculator</h2>
+          <span class="version">v1.0.0</span>
+
+          <div class="about-section">
+            <h4>About</h4>
+            <p>A fast, free, and offline-ready Attendance Percentage Calculator. Instantly know your current attendance %, how many more periods you need, and how many days to attend to hit your target.</p>
+          </div>
+          <div class="about-section">
+            <h4>Developer</h4>
+            <p>Built with ❤️ by <strong>RDJPublishers</strong> — <a href="https://rdjpublishers.github.io/" target="_blank" rel="noopener">rdjpublishers.github.io</a></p>
+          </div>
+          <div class="about-section">
+            <h4>Contact</h4>
+            <p><a href="mailto:rdjpublishers@gmail.com">rdjpublishers@gmail.com</a></p>
+          </div>
+          <div class="about-section">
+            <h4>Privacy</h4>
+            <p>All data is stored locally on your device. No data is sent to any server.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══ FOOTER NAV ════════════════════════════════════════════ -->
+  <footer role="navigation" aria-label="Bottom navigation">
+    <button class="footer-nav-item active" data-section="calculator-section" aria-label="Calculator">
+      <i class="fas fa-calculator" aria-hidden="true"></i>Home
+    </button>
+    <button class="footer-nav-item" data-section="history-section" aria-label="History">
+      <i class="fas fa-clock-rotate-left" aria-hidden="true"></i>History
+    </button>
+    <button class="footer-nav-item" data-section="settings-section" aria-label="Settings">
+      <i class="fas fa-gear" aria-hidden="true"></i>Settings
+    </button>
+  </footer>
+
+  <!-- ═══ JAVASCRIPT ════════════════════════════════════════════ -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      /* ── Helpers ── */
+      const $ = id => document.getElementById(id);
+      const fmt = (n, d = 1) => Number(n).toFixed(d);
+
+      /* ── State ── */
+      let history = JSON.parse(localStorage.getItem('attendanceHistory') || '[]');
+      let lastResult = null;
+
+      /* ── Theme ── */
+      const themeToggle = $('theme-toggle');
+      if (localStorage.getItem('theme') === 'dark') {
+        document.body.classList.add('dark');
+        themeToggle.checked = true;
+      }
+      themeToggle.addEventListener('change', () => {
+        document.body.classList.toggle('dark', themeToggle.checked);
+        localStorage.setItem('theme', themeToggle.checked ? 'dark' : 'light');
+      });
+
+      /* ── Sidebar ── */
+      const sidebar = $('sidebar');
+      const overlay = $('overlay');
+      const menuIcon = $('menu-icon');
+      const menuIconI = $('menu-icon-i');
+
+      function openSidebar() {
+        sidebar.classList.add('open');
+        overlay.classList.add('show');
+        menuIconI.className = 'fas fa-times';
+      }
+      function closeSidebar() {
+        sidebar.classList.remove('open');
+        overlay.classList.remove('show');
+        menuIconI.className = 'fas fa-bars';
+      }
+      menuIcon.addEventListener('click', () => sidebar.classList.contains('open') ? closeSidebar() : openSidebar());
+      overlay.addEventListener('click', closeSidebar);
+
+      /* ── Navigation ── */
+      const sections  = document.querySelectorAll('.section');
+      const navItems  = document.querySelectorAll('.nav-item');
+      const footerItems = document.querySelectorAll('.footer-nav-item');
+
+      function switchSection(id) {
+        sections.forEach(s => s.classList.remove('active'));
+        $( id ).classList.add('active');
+        navItems.forEach(n => n.classList.toggle('active', n.dataset.section === id));
+        footerItems.forEach(f => f.classList.toggle('active', f.dataset.section === id));
+        closeSidebar();
+        if (id === 'history-section') renderHistory();
+      }
+
+      navItems.forEach(n => n.addEventListener('click', () => switchSection(n.dataset.section)));
+      footerItems.forEach(f => f.addEventListener('click', () => switchSection(f.dataset.section)));
+
+      /* ── Calculator ── */
+      $('calculate-btn').addEventListener('click', () => {
+        const present = parseInt($('periods-present').value, 10);
+        const total   = parseInt($('total-periods').value, 10);
+        const perDay  = parseInt($('periods-per-day').value, 10);
+        const desired = parseFloat($('desired-percentage').value);
+        const res = $('results');
+
+        res.classList.add('hidden');
+
+        if ([present, total, perDay, desired].some(isNaN)) {
+          alert('Please fill in all fields with valid numbers.');
+          return;
+        }
+        if (present < 0 || total < 0 || perDay <= 0 || desired < 0 || desired > 100) {
+          alert('Please enter sensible positive values. Desired % must be 0–100.');
+          return;
+        }
+        if (present > total) {
+          alert('Periods present cannot exceed total periods.');
+          return;
+        }
+
+        const curPct = total === 0 ? 0 : (present / total) * 100;
+        let periodsNeeded = 0, daysNeeded = 0, pctAfter = curPct;
+        let summary = `${present} / ${total} periods`;
+
+        if (curPct < desired) {
+          const denom = 100 - desired;
+          if (denom <= 0) { alert("Impossible to reach 100% after missing periods."); return; }
+          periodsNeeded = Math.ceil((desired * total - 100 * present) / denom);
+          daysNeeded = periodsNeeded > 0 ? Math.ceil(periodsNeeded / perDay) : 0;
+          pctAfter = (present + periodsNeeded) / (total + periodsNeeded) * 100;
+          summary = `${present + periodsNeeded} / ${total + periodsNeeded} periods`;
+        }
+
+        $('current-percentage').textContent  = fmt(curPct) + '%';
+        $('periods-needed').textContent      = periodsNeeded;
+        $('days-needed').textContent         = daysNeeded;
+        $('percentage-after').textContent    = fmt(pctAfter) + '%';
+        $('attended-summary').textContent    = summary;
+        res.classList.remove('hidden');
+
+        lastResult = { present, total, perDay, desired, curPct: fmt(curPct), periodsNeeded, daysNeeded, pctAfter: fmt(pctAfter), summary };
+        saveHistory(lastResult);
+      });
+
+      /* ── History ── */
+      function saveHistory(data) {
+        const entry = { ts: new Date().toLocaleString(), ...data };
+        history.unshift(entry);
+        if (history.length > 50) history.pop();
+        localStorage.setItem('attendanceHistory', JSON.stringify(history));
+      }
+
+      function renderHistory() {
+        const list = $('history-list');
+        list.innerHTML = '';
+        if (!history.length) {
+          list.innerHTML = '<li class="no-history"><i class="fas fa-inbox"></i><br>No calculations yet.</li>';
+          return;
+        }
+        history.forEach((item, i) => {
+          const li = document.createElement('li');
+          li.className = 'history-item';
+          li.innerHTML = `
+            <div class="hi-timestamp">#${i+1} &nbsp;·&nbsp; ${item.ts}</div>
+            <div class="hi-grid">
+              <div class="hi-stat">Current: <span>${item.curPct}%</span></div>
+              <div class="hi-stat">Desired: <span>${item.desired}%</span></div>
+              <div class="hi-stat">Periods needed: <span>${item.periodsNeeded}</span></div>
+              <div class="hi-stat">Days needed: <span>${item.daysNeeded}</span></div>
+            </div>`;
+          list.appendChild(li);
+        });
+      }
+
+      function clearHistory() {
+        if (confirm('Clear all calculation history? This cannot be undone.')) {
+          localStorage.removeItem('attendanceHistory');
+          history = [];
+          renderHistory();
+        }
+      }
+
+      $('clear-history-btn').addEventListener('click', clearHistory);
+      $('clear-history-settings-btn').addEventListener('click', clearHistory);
+      $('refresh-btn').addEventListener('click', () => location.reload());
+
+      /* ── Share ── */
+      $('share-wa').addEventListener('click', () => {
+        if (!lastResult) return;
+        const msg = `📊 My Attendance: ${lastResult.curPct}%\n` +
+          `🎯 Desired: ${lastResult.desired}%\n` +
+          `📅 Days needed: ${lastResult.daysNeeded}\n\n` +
+          `Calculate yours 👉 https://rdjpublishers.github.io/attendance-calculator/`;
+        window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
+      });
+      $('share-tw').addEventListener('click', () => {
+        if (!lastResult) return;
+        const msg = `My attendance is ${lastResult.curPct}%. Need ${lastResult.daysNeeded} more days to hit ${lastResult.desired}% 🎯\n\nCalculate yours: https://rdjpublishers.github.io/attendance-calculator/ #attendance #students`;
+        window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(msg), '_blank');
+      });
+
+    });
+  </script>
+</body>
+</html>
