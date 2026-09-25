@@ -120,6 +120,7 @@
       --font-mono: 'Space Mono', monospace;
       --header-h: 60px;
       --footer-h: 64px;
+      --site-footer-h: 56px;
     }
 
     /* ─── DARK THEME ──────────────────────────────────────────── */
@@ -227,7 +228,7 @@
     /* ─── MAIN ────────────────────────────────────────────────── */
     main {
       flex: 1;
-      padding: calc(var(--header-h) + 1.25rem) 1rem calc(var(--footer-h) + 1.25rem);
+      padding: calc(var(--header-h) + 1.25rem) 1rem calc(var(--footer-h) + var(--site-footer-h) + 1.25rem);
       display: flex; flex-direction: column; align-items: center;
     }
 
@@ -463,7 +464,7 @@
 
     /* ─── FOOTER NAV ──────────────────────────────────────────── */
     footer {
-      position: fixed; bottom: 0; left: 0; right: 0;
+      position: fixed; bottom: var(--site-footer-h); left: 0; right: 0;
       height: var(--footer-h);
       background: var(--surface);
       border-top: 1px solid var(--border);
@@ -511,6 +512,122 @@
     /* ─── SCROLLBAR ───────────────────────────────────────────── */
     ::-webkit-scrollbar { width: 5px; }
     ::-webkit-scrollbar-thumb { background: var(--blue-300); border-radius: 4px; }
+
+    /* ─── INFO SECTION (explanation + FAQ) ───────────────────── */
+    .info-card .card-body { padding-top: 1rem; }
+    .info-intro {
+      font-size: 0.93rem;
+      line-height: 1.7;
+      color: var(--text);
+      margin-bottom: 1.1rem;
+    }
+    .info-intro strong { color: var(--blue-700); }
+    body.dark .info-intro strong { color: var(--blue-300); }
+
+    .faq-title {
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0.4rem 0 0.6rem;
+    }
+    .faq-item {
+      border-top: 1px solid var(--border);
+      padding: 0;
+    }
+    .faq-item:first-child { border-top: none; }
+    .faq-item summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 0.85rem 0;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      transition: color 0.18s;
+    }
+    .faq-item summary:hover { color: var(--blue-500); }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after {
+      content: '+';
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--blue-500);
+      line-height: 1;
+      flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+    .faq-item[open] summary::after { content: '−'; }
+    .faq-item p {
+      font-size: 0.9rem;
+      line-height: 1.65;
+      color: var(--muted);
+      padding: 0 0 1rem;
+    }
+
+    /* ─── SITE FOOTER (legal links + AdSense disclosure) ─────── */
+    .site-footer {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      height: var(--site-footer-h);
+      background: linear-gradient(135deg, var(--blue-900) 0%, #0a2050 100%);
+      color: rgba(255,255,255,0.78);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 4px 10px;
+      z-index: 1100;
+      text-align: center;
+      font-size: 0.72rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      user-select: none;
+      line-height: 1.3;
+    }
+    .site-footer .sf-links {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 0 2px;
+      font-weight: 600;
+    }
+    .site-footer a {
+      color: rgba(255,255,255,0.92);
+      text-decoration: none;
+      padding: 0 5px;
+      transition: color 0.18s;
+    }
+    .site-footer a:hover,
+    .site-footer a:focus-visible {
+      color: #fff;
+      text-decoration: underline;
+    }
+    .site-footer .sep {
+      color: rgba(255,255,255,0.35);
+      margin: 0 1px;
+    }
+    .site-footer .sf-disclosure {
+      font-size: 0.65rem;
+      color: rgba(255,255,255,0.6);
+      max-width: 820px;
+      margin-top: 2px;
+    }
+    .site-footer .sf-disclosure a {
+      color: rgba(255,255,255,0.85);
+      padding: 0 2px;
+    }
+
+    /* ─── MOBILE TWEAKS ──────────────────────────────────────── */
+    @media (max-width: 480px) {
+      :root { --site-footer-h: 66px; }
+      .site-footer { font-size: 0.68rem; padding: 3px 6px; }
+      .site-footer .sf-disclosure { font-size: 0.6rem; line-height: 1.25; }
+    }
   </style>
 </head>
 <body>
@@ -536,7 +653,20 @@
     <div class="nav-item" data-section="about-section" role="button" tabindex="0">
       <i class="fas fa-circle-info" aria-hidden="true"></i><span>About</span>
     </div>
-    <div class="sidebar-footer">© 2026 RDJPublishers</div>
+    <div class="sidebar-footer">
+      © 2026 RDJPublishers
+      <div style="margin-top:0.5rem; display:flex; flex-wrap:wrap; gap:2px 6px;">
+        <a href="https://rdjpublishers.com/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.55); text-decoration:none;">Home</a>
+        <span style="color:rgba(255,255,255,0.25);">·</span>
+        <a href="https://rdjpublishers.com/about.html" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.55); text-decoration:none;">About</a>
+        <span style="color:rgba(255,255,255,0.25);">·</span>
+        <a href="https://rdjpublishers.com/contact.html" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.55); text-decoration:none;">Contact</a>
+        <span style="color:rgba(255,255,255,0.25);">·</span>
+        <a href="https://rdjpublishers.com/privacy-policy.html" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.55); text-decoration:none;">Privacy</a>
+        <span style="color:rgba(255,255,255,0.25);">·</span>
+        <a href="https://rdjpublishers.com/terms.html" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.55); text-decoration:none;">Terms</a>
+      </div>
+    </div>
   </nav>
 
   <!-- ═══ HEADER ════════════════════════════════════════════════ -->
@@ -629,6 +759,41 @@
           </div>
         </div>
       </div>
+
+      <!-- INFO SECTION: explanation + FAQ (visible on first load) -->
+      <div class="card info-card" aria-label="About the Attendance Calculator">
+        <div class="card-header">
+          <h2>How this calculator helps</h2>
+          <p>A practical guide for students who want to stay on top of attendance</p>
+        </div>
+        <div class="card-body">
+          <p class="info-intro">
+            The <strong>Attendance Percentage Calculator</strong> is built for students who need fast, honest answers about their attendance. Enter the <strong>number of periods you've attended</strong>, the <strong>total periods conducted so far</strong>, the <strong>periods per day</strong> in your timetable, and the <strong>minimum percentage</strong> your college or school requires — usually 75% in India. The tool instantly shows your <strong>current attendance percentage</strong>, the <strong>number of additional periods</strong> you must attend to reach your goal, and converts that into the <strong>number of full days</strong> you need to be present without taking leave. If you have already crossed the safe zone, it tells you how many periods you can afford to miss and still stay above the cutoff.
+          </p>
+          <p class="info-intro">
+            Everything runs <strong>locally in your browser</strong> — no login, no sign-up, no data upload. Your numbers never leave your device. Use it as often as you want, on your phone between classes, to plan your attendance for the rest of the semester.
+          </p>
+
+          <h3 class="faq-title">Frequently Asked Questions</h3>
+
+          <details class="faq-item" open>
+            <summary>How is the attendance percentage calculated?</summary>
+            <p>Your attendance percentage is simply <strong>(periods attended ÷ total periods conducted) × 100</strong>. The calculator does this for you the moment you tap Calculate. The "days to attend" figure assumes you attend every period of every remaining day without any leave, so it's a best-case estimate — if you skip a day, just recalculate.</p>
+          </details>
+          <details class="faq-item">
+            <summary>My attendance is below 75% — can this tool help me recover?</summary>
+            <p>Yes. Enter your current numbers and the desired percentage (for example 75%). The result will tell you exactly how many periods — and how many full days — you need to attend consecutively to climb back above the cutoff. Many students use this to plan a realistic recovery schedule.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Do you store any of my numbers?</summary>
+            <p>No. All calculations happen inside your browser. Nothing is uploaded to a server. If you choose to save a calculation to History, it is stored only in your browser's <strong>localStorage</strong> on this device — clear it any time from Settings → Clear History.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Does this work for schools, colleges, and coaching classes?</summary>
+            <p>Yes — the formula is the same everywhere: attended ÷ total × 100. Just enter your own numbers for periods present, total periods, periods per day, and your institution's required minimum. The tool works for semester systems, term systems, and any timetable with a fixed number of periods per day.</p>
+          </details>
+        </div>
+      </div>
     </section>
 
     <!-- HISTORY SECTION -->
@@ -700,7 +865,15 @@
           </div>
           <div class="about-section">
             <h4>Privacy</h4>
-            <p>All data is stored locally on your device. No data is sent to any server.</p>
+            <p>All data is stored locally on your device. No data is sent to any server. Read the full <a href="https://rdjpublishers.com/privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a> for details.</p>
+          </div>
+          <div class="about-section">
+            <h4>Terms</h4>
+            <p>By using this calculator you agree to our <a href="https://rdjpublishers.com/terms.html" target="_blank" rel="noopener">Terms and Conditions</a>.</p>
+          </div>
+          <div class="about-section">
+            <h4>Advertising</h4>
+            <p>This page may display ads served by Google AdSense using cookies or device-level identifiers. See our <a href="https://rdjpublishers.com/privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a> for details and opt-out information.</p>
           </div>
         </div>
       </div>
@@ -720,6 +893,24 @@
       <i class="fas fa-gear" aria-hidden="true"></i>Settings
     </button>
   </footer>
+
+  <!-- ═══ SITE FOOTER (legal links + AdSense disclosure; always visible) ═══ -->
+  <div class="site-footer" role="contentinfo" aria-label="Site footer">
+    <div class="sf-links">
+      <a href="https://rdjpublishers.com/" target="_blank" rel="noopener">Home</a>
+      <span class="sep">·</span>
+      <a href="https://rdjpublishers.com/about.html" target="_blank" rel="noopener">About</a>
+      <span class="sep">·</span>
+      <a href="https://rdjpublishers.com/contact.html" target="_blank" rel="noopener">Contact</a>
+      <span class="sep">·</span>
+      <a href="https://rdjpublishers.com/privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>
+      <span class="sep">·</span>
+      <a href="https://rdjpublishers.com/terms.html" target="_blank" rel="noopener">Terms</a>
+    </div>
+    <div class="sf-disclosure">
+      Advertising on this page may be served by Google AdSense using cookies or device-level identifiers. See our <a href="https://rdjpublishers.com/privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a> for details and opt-out information.
+    </div>
+  </div>
 
   <!-- ═══ JAVASCRIPT ════════════════════════════════════════════ -->
   <script>
